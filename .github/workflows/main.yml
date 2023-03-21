@@ -2,8 +2,7 @@ name: workflow to build and push docker image to docker hub
 run-name: Docker build push to hub workflow
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   login:
@@ -19,4 +18,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: nirmalcontainer/static-html:v1
+          tags: testcontainer/static-html:v1
