@@ -29,3 +29,12 @@ jobs:
           context: .
           push: true
           tags: abc123119/test:latest
+       
+      - 
+         name: Security scan on docker image
+         uses: snyk/actions/docker@master
+         env:
+            SNYK_TOKEN: ${{secrets.SNYK_TOKEN}}
+         with:
+            image: abc123119/test:latest
+          
