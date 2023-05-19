@@ -29,4 +29,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: http://13.231.139.12:8081/artifactory.jfrog.io/abc123119/test:latest
+          tags: http://13.231.139.12:8081/artifactory/libs-snapshot-local.jfrog.io/abc123119/test:latest
