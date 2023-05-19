@@ -1,31 +1,28 @@
-name: ci
+name: Push Docker Image to JFrog
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  docker:
+  pushToJFrog:
     runs-on: ubuntu-latest
+
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
-        name: Login to jFrog
-        uses: jfrog/setup-jfrog-cli@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v1
         with:
-          registry: http://13.231.139.12:8081/artifactory/
-          username: ${{ secrets.JFROGUSERNAME }}
-          password: ${{ secrets.JFROGPASSWORD }}
-      -
-        name: push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
+          jfrog-cli-version: 'latest'
+
+      - name: Build and Push Docker Image
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t jfro-img:${IMAGE_TAG} .
+          docker tag jfro-img:${IMAGE_TAG} http://13.231.139.12:8081/artifactory/docker-repo/jfro-img:${IMAGE_TAG}
+          docker login -u ${{ secrets.JFROGUSERNAME }} -p ${{ secrets.JFROGPASSWORD }} http://13.231.139.12:8081
+          docker push http://13.231.139.12:8081/artifactory/docker-repo/jfro-img:${IMAGE_TAG}
