@@ -25,5 +25,5 @@ jobs:
         run: |
          docker build -t fro-img:${IMAGE_TAG} .
          docker tag fro-img:${IMAGE_TAG} ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
-         docker login http://13.231.139.12:8081 -u admin -p admin123 
+         docker login ${JFROG_REGISTRY} -u admin -p admin123 
          docker push http://13.231.139.12:8081/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
