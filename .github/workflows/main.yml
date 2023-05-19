@@ -1,3 +1,4 @@
+
 name: Push Docker Image to JFrog
 
 on:
@@ -16,17 +17,14 @@ jobs:
         with:
           jfrog-cli-version: 'latest'
           
-      - name: Log in to JFrog Container Registry
+      - name: Build and Push Docker Image
         env:
-          DOCKER_USERNAME: ${{ secrets.JFROG_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.JFROG_PASSWORD }}
-          DOCKER_REGISTRY: http://13.231.139.12:8081
+         IMAGE_TAG: ${{ github.sha }}
+         JFROG_REGISTRY: 13.231.139.12:8081
+         REPO: docker-repos
+         IMAGE_NAME: dock-img
         run: |
-          echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY
-
-      - name: Build and Push JAR file
-        env:
-          JFROG_REPO: docker-repos
-          JAR_FILE_PATH: target/lenovo.war
-        run: |
-          jfrog rt u "${JAR_FILE_PATH}" "${JFROG_REPO}/<TARGET_PATH>
+         docker build -t fro-img:${IMAGE_TAG} .
+         docker tag fro-img:${IMAGE_TAG} ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
+         docker login -u ${{ secrets.JFROG_USERNAME }} -p ${{ secrets.JFROG_PASSWORD }} --password-stdin http://13.231.139.12:8081
+         docker push ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
