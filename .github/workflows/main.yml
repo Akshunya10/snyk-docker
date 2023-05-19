@@ -21,6 +21,6 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t jfro-img:${IMAGE_TAG} .
-          docker tag jfro-img:${IMAGE_TAG} http://13.231.139.12:8081/artifactory/docker-repo/jfro-img:${IMAGE_TAG}
+          docker tag jfro-img:${IMAGE_TAG}
           docker login -u ${{ secrets.JFROGUSERNAME }} -p ${{ secrets.JFROGPASSWORD }} http://13.231.139.12:8081
           docker push jfro-img:${IMAGE_TAG}
