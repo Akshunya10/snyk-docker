@@ -20,7 +20,7 @@ jobs:
         name: Login to jFrog
         uses: docker/login-action@v2
         with:
-          registry: http://13.231.139.12:8081/artifactory.jfrog.io
+          registry: http://13.231.139.12:8081/artifactory/libs-snapshot-local
           username: ${{ secrets.JFROGUSERNAME }}
           password: ${{ secrets.JFROGPASSWORD }}
       -
@@ -29,4 +29,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: http://13.231.139.12:8081/artifactory/libs-snapshot-local.jfrog.io/abc123119/test:latest
+          tags: http://13.231.139.12:8081/artifactory/libs-snapshot-local/abc123119/test:latest
