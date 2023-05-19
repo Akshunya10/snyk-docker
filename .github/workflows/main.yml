@@ -20,7 +20,7 @@ jobs:
         env:
          IMAGE_TAG: ${{ github.sha }}
          JFROG_REGISTRY: http://13.231.139.12:8081/artifactory
-         REPO: docker-repo
+         REPO: libs-snapshot-local
          IMAGE_NAME: dock-img
         run: |
          docker build -t fro-img:${IMAGE_TAG} .
