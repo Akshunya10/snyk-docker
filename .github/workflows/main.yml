@@ -15,12 +15,15 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v1
         with:
           jfrog-cli-version: 'latest'
-
+          
       - name: Build and Push Docker Image
         env:
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          docker build -t jfro-img:${IMAGE_TAG} .
-          docker tag jfro-img:${IMAGE_TAG}
-          docker login -u ${{ secrets.JFROGUSERNAME }} -p ${{ secrets.JFROGPASSWORD }} http://13.231.139.12:8081
-          docker push jfro-img:${IMAGE_TAG}
+         IMAGE_TAG: ${{ github.sha }}
+         JFROG_REGISTRY: http://13.231.139.12:8081
+         REPO: docker-repo
+         IMAGE_NAME: dock-img
+         run: |
+          docker build -t fro-img:${IMAGE_TAG} .
+          docker tag fro-img:${IMAGE_TAG} ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
+          docker login -u ${{ secrets.JFROG_USERNAME }} -p ${{ secrets.JFROG_PASSWORD }} ${JFROG_REGISTRY}
+          docker push ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
