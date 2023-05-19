@@ -25,5 +25,5 @@ jobs:
         run: |
          docker build -t fro-img:${IMAGE_TAG} .
          docker tag fro-img:${IMAGE_TAG} ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
-         docker login -u ${{ secrets.JFROG_PASSWORD }} -p ${{ secrets.JFROG_PASSWORD }} ${JFROG_REGISTRY}
+         docker login -u ${{ secrets.JFROG_USERNAME }} -p ${{ secrets.JFROG_PASSWORD }} ${JFROG_REGISTRY}
          docker push ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
