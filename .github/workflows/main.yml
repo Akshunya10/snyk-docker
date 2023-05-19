@@ -22,8 +22,8 @@ jobs:
          JFROG_REGISTRY: http://13.231.139.12:8081
          REPO: docker-repo
          IMAGE_NAME: dock-img
-         run: |
-          docker build -t fro-img:${IMAGE_TAG} .
-          docker tag fro-img:${IMAGE_TAG} ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
-          docker login -u ${{ secrets.JFROG_USERNAME }} -p ${{ secrets.JFROG_PASSWORD }} ${JFROG_REGISTRY}
-          docker push ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
+        run: |
+         docker build -t fro-img:${IMAGE_TAG} .
+         docker tag fro-img:${IMAGE_TAG} ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
+         docker login -u ${{ secrets.JFROG_USERNAME }} -p ${{ secrets.JFROG_PASSWORD }} ${JFROG_REGISTRY}
+         docker push ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
