@@ -17,9 +17,10 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       -
-        name: Login to Docker Hub
+        name: Login to jFrog
         uses: docker/login-action@v2
         with:
+          registry: http://13.231.139.12:8081/artifactory.jfrog.io
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
       -
@@ -28,13 +29,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: abc123119/test:latest
-       
-      - 
-         name: Security scan on docker image
-         uses: snyk/actions/docker@master
-         env:
-            SNYK_TOKEN: ${{secrets.SNYK_TOKEN}}
-         with:
-            image: abc123119/test:latest
-          
+          tags: http://13.231.139.12:8081/artifactory.jfrog.io/abc123119/test:latest
