@@ -26,6 +26,5 @@ jobs:
         run: |
          docker build -t fro-img:${IMAGE_TAG} .
          docker tag fro-img:${IMAGE_TAG} ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
-         jfrog rt u --url=http://${JFROG_REGISTRY} --user=${{ secrets.JFROG_USERNAME }} --password=${{ secrets.JFROG_PASSWORD }} --interactive=false
-         jfrog rt docker-push ${JFROG_REGISTRY}/${REPO}/${IMAGE_NAME}:${IMAGE_TAG} --build-name=my-docker-build --build-number=${{ github.run_number }}
-
+         
+         jf rt u "target/lenovo.war" "http://13.231.139.12:8081/artifactory/docker-repo/"
