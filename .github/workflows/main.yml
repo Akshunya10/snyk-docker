@@ -30,5 +30,22 @@ jobs:
           push: true
           tags: user/app:latest
    
-          
+      - name: Build and Push Docker Image
+        env:
+         IMAGE_TAG: ${{ github.sha }}
+         JFROG_REGISTRY: 13.231.139.12:8081
+         REPO: docker-repos
+         IMAGE_NAME: dock-img
+        run : | 
+            docker build -t fro-img:${IMAGE_TAG} .
+            docker images
+      
+      - name: Inspect Docker image
+        run: docker inspect fro-img:${{ github.sha }}
+        id: inspect
+        
+      - name: Display image location
+        run: |
+           echo "Image location:${{ steps.inspect.outputs.stdout }}"   
+           jf rt -u "/var/lib/docker/overlay2/569c14ef4a281d479b06c4eeab131e42a36ef890" "http://13.231.139.12:8081/docker-repos/"    
       
