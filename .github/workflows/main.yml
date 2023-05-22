@@ -33,4 +33,4 @@ jobs:
         run : | 
             docker build -t fro-img:${IMAGE_TAG} .
             docker images
-            jfrog rt docker-push fro-img/${IMAGE_TAG} http://13.231.139.12:8081/docker-repo/
+            jfrog rt docker-push jfrog.io/docker-repo/fro-img/${IMAGE_TAG} http://13.231.139.12:8081/docker-repo/
