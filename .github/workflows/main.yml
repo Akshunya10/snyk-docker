@@ -23,12 +23,6 @@ jobs:
          JF_URL: http://13.231.139.12:8081
          username : ${{ secrets.JFROGUSERNAME }}
          password : ${{ secrets.JFROGPASSWORD }}
-         
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: user/app:latest
    
       - name: Build and Push Docker Image
         env:
