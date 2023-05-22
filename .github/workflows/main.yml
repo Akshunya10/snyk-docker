@@ -30,6 +30,6 @@ jobs:
          JFROG_REGISTRY: 13.231.139.12:8081
          REPO: docker-repos
          IMAGE_NAME: dock-img
-         run : | 
-               docker build -t fro-img .
-               jf rt u "fro-img" "http://13.231.139.12:8081/artifactory/docker-repo/"
+        run : | 
+            docker build -t fro-img .
+            jf rt u "fro-img" "http://13.231.139.12:8081/artifactory/docker-repo/"
