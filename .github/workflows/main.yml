@@ -33,6 +33,7 @@ jobs:
         run : | 
             docker build -t fro-img:${IMAGE_TAG} .
             docker images
+            docker info
       
       - name: Inspect Docker image
         run: docker inspect fro-img:${{ github.sha }}
