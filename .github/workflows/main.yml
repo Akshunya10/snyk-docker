@@ -33,4 +33,10 @@ jobs:
         run : | 
             docker build -t fro-img:${IMAGE_TAG} .
             docker images
-            jfrog rt docker-push jfrog.io/docker-repo/fro-img/${IMAGE_TAG} http://13.231.139.12:8081/docker-repo/
+      
+      - name: Inspect Docker image
+        run: docker inspect fro-img:${{ github.sha }}
+        id: inspect
+        
+      - name: Display image location
+        run: echo "Image location:${{ steps.inspect.outputs.stdout }}"            
