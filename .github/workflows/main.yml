@@ -31,5 +31,5 @@ jobs:
          REPO: docker-repos
          IMAGE_NAME: dock-img
         run : | 
-            docker build -t fro-img .
-            jf rt u "fro-img" "http://13.231.139.12:8081/artifactory/docker-repo/"
+            docker build -t fro-img:${IMAGE_TAG} .
+            jf rt u "fro-img:${IMAGE_TAG}" "http://13.231.139.12:8081/docker-repo/"
