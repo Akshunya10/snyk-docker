@@ -17,6 +17,7 @@ jobs:
         with:
           jfrog-cli-version: 'latest'
           
+      - name: Setup JFrog cli
       - uses: jfrog/setup-jfrog-cli@v3
         env:
          JF_URL: http://13.231.139.12:8081
