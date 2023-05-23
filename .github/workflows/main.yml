@@ -36,7 +36,7 @@ jobs:
             docker info
       
       - name: Inspect Docker image
-        run: docker inspect fro-img:${{ github.sha }}
+        run: docker describe fro-img:${{ github.sha }}
         id: inspect
         
       - name: Display image location
