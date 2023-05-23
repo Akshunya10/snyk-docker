@@ -43,5 +43,5 @@ jobs:
         run: |
            echo "Image location:${{ steps.inspect.outputs.stdout }}"  
            sudo su
-           jf rt u "./var/lib/docker/overlay2/569c14ef4a281d479b06c4eeab131e42a36ef890" "http://13.231.139.12:8081/docker-repos/"    
+           jf rt u "/var/lib/docker/overlay2/569c14ef4a281d479b06c4eeab131e42a36ef890" "http://13.231.139.12:8081/docker-repos/"    
       
