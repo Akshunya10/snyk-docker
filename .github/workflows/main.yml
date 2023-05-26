@@ -34,9 +34,6 @@ jobs:
             docker build -t fro-img:${IMAGE_TAG} .
             docker images
             docker info
-      
-      - name: Inspect Docker image
-        id: inspect
         
       - name: Display image location
         run: |
